@@ -1,0 +1,77 @@
+datasets:
+  gistemp_no_smooth:
+    cls: src.data.gistemp.GISTempAnnual
+    params:
+      path: ../data/raw/nasa_temp.txt
+      use_column: no_smoothing
+      year_range: [1880, 2024]
+      name: gistemp_no_smooth_annual
+
+  silso_monthly_1980_2014:
+    cls: src.data.silso.SilsoMonthly
+    params:
+      path: ../data/raw/SN_m_tot_V2.0.txt
+      year_range: [1980, 2014]
+      name: silso_monthly
+
+  synth_inhom_n512_s005:
+    cls: src.data.synthetic.SyntheticInhomogeneous
+    params:
+      n: 512
+      sigma: 0.05
+#      seed: 42
+      name: synthetic_inhomogeneous_512_s005
+
+  synth_custom_n512_s005:
+    cls: src.data.synthetic.SyntheticCustom
+    params:
+      n: 512
+      sigma: 0.05
+      #      seed: 7
+      name: synthetic_custom_512_s005
+
+  synth_custom_n2048_s005:
+    cls: src.data.synthetic.SyntheticCustom
+    params:
+      n: 2048
+      sigma: 0.05
+      #      seed: 7
+      name: synthetic_custom_2048_s005
+
+  synth_spikes:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      name: synthetic_spikes_base
+
+  synth_spikes_n512_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 512
+      sigma: 0.05
+      seed: 42
+      name: synthetic_spikes_512_s005
+      num_spikes: 2
+
+  synth_spikes_n2048_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 2048
+      sigma: 0.05
+      seed: 42
+      name: synthetic_spikes_2048_s005
+      num_spikes: 2
+
+  synth_spikes_n8192_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 8192
+      sigma: 0.05
+      seed: 42
+      name: synthetic_spikes_8192_s005
+      num_spikes: 2
+
+  synth_spikes_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      sigma: 0.15
+      name: sigma_spikes_s005
