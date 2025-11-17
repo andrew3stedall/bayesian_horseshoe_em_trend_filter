@@ -1,0 +1,114 @@
+# Matrix-style plan: datasets × methods × settings
+# Paths are resolved relative to PROJECT ROOT (as per your registry loader).
+
+defaults:
+  order: 2                 # order = 2 (k=1) (piecewise-linear)
+  sparsity_threshold_rule: "1/(5*sqrt(n))"   # rule to count active beta_j
+  save_preds: false
+  repetitions: 1           # per dataset × method (use >1 for synthetic)
+
+datasets:
+  # Reference names that exist in configs/datasets.yaml
+  - name: gistemp_no_smooth
+    label: "GISTEMP (annual)"
+    type: real
+  - name: silso_monthly_1980_2014
+    label: "SILSO (monthly)"
+    type: real
+  - name: synth_inhom_n512_s005
+    label: "Synthetic: inhomogeneous (n=512, σ=0.05)"
+    type: synthetic
+    repetitions: 3
+  - name: synth_custom_n512_s005
+    label: "Synthetic: custom (n=512, σ=0.05)"
+    type: synthetic
+    repetitions: 5
+  - name: synth_spikes_n512_s005
+    label: "Synthetic: 2 spikes (n=512, σ=0.05)"
+    type: synthetic
+    repetitions: 5
+  - name: synth_spikes_n2048_s005
+    label: "Synthetic: 2 spikes (n=2048, σ=0.05)"
+    type: synthetic
+    repetitions: 3
+  - name: synth_spikes_s005
+    label: "Synthetic: 4 spikes (n=4096, σ=0.05)"
+    type: synthetic
+    num_spikes: 4
+    n: 4096
+    repetitions: 3
+#  - name: synth_spikes_n8192_s005
+#    label: "Synthetic: spikes (n=8192, σ=0.05)"
+#    type: synthetic
+#    repetitions: 2
+
+methods:
+  - key: hs_em
+    label: "Bayesian Horseshoe (EM)"
+    params:
+      max_iter: 1000
+      conv_tol: 1e-5
+      damp_tau: 0.01
+      do_threshold: false
+      verbose: false
+
+  - key: l1_em
+    label: "Bayesian L1 (EM)"
+    params:
+      max_iter: 1000
+      conv_tol: 1e-5
+      tau2: 1e-5
+      tau2_grid: [ 1e-1, 1e-2, 1e-3, 1e-4, 1e-5 ]
+      cv_folds: 5
+      do_threshold: false
+      verbose: false
+
+  - key: l1_em_cv
+    label: "Bayesian L1 (EM CV)"
+    params:
+      max_iter: 1000
+      conv_tol: 1e-5
+      tau2: 1e-5
+      tau2_grid: [ 1e-5, 2e-5, 3e-5, 4e-5, 5e-5 ]
+      cv_folds: 5
+      do_threshold: false
+      verbose: false
+
+  - key: l1_tf_cv
+    label: "Frequentist L1 (CV)"
+    params:
+      lambda_grid: [ 0.1, 0.3, 1.0, 3.0, 10.0 ]
+      cv_folds: 5
+      scoring: "mse"
+
+  - key: bayes_l1_gibbs
+    label: "Bayesian L1 (Gibbs)"
+    params:
+      n_iter: 500
+      burn_in: 100
+      thin: 10
+      seed: 42
+
+  - key: krr
+    label: "Kernel Ridge"
+    params:
+      kernel: "rbf"
+      alpha_grid: [ 1e-6, 1e-3, 1e-2, 1e-1, 1.0 ]
+      gamma_grid: [ 1.0, 10.0, 50.0, 100.0 ]
+
+metrics:
+  - mse
+  - mae
+  - sparsity_count
+  - runtime_s
+
+output:
+  dir: ../results
+  overwrite: false       # true -> start fresh (rewrite metrics/runs and allow trace overwrite)
+  save_traces: true      # save x, y, y_hat (+ beta_hat) per run
+  traces_dir: ../results/traces
+  trace_scale: both  # {original, transformed, both}
+  save_figs: true           # save a PNG per run
+  figs_dir: ../results/figs    # where to save figures
+  fig_scale: original       # {original, transformed, both}
+  fig_dpi: 300              # image DPI

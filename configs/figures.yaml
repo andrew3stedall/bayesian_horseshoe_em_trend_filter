@@ -1,0 +1,392 @@
+defaults:
+  colours: [ "#f1c340", "#f20133", "#2f1320", "#14954d", "#028fc1", "#8c8c8c", "#ef8700"]
+
+figures:
+#  overlay_chart_spikes:
+#    title: "Synthetic Spikes — overlay fits"
+#    cls: "src.figure.OverlayFits"
+#    params:
+#      methods: [krr, l1_tf_cv, l1_em_cv, hs_em ]
+#      dataset: synth_spikes   # must be runnable by your runner
+#      n: 1024
+#      sigma: 0.6
+#      seeds: [ 42,23,3 ]
+#      name: test
+#      num_spikes: 4
+#      output: "overlay_spikes"
+#      overwrite: False
+
+#
+#  overlay_chart_inhom:
+#    title: "Synthetic Inhomogenous"
+#    cls: "src.figure.OverlayFits"
+#    params:
+#      methods: [krr, l1_tf_cv, l1_em_cv, hs_em ]
+#      sigma: 0.6
+#      seeds: [ 42,23,3 ]
+#      n: 1024
+#      dataset: synth_inhom   # must be runnable by your runner
+#      output: "overlay_inhomo"
+#      overwrite: False
+
+#  beta_histograms:
+#    title: "β distribution across iterations (HS–EM)"
+#    cls: "src.figure.BetaHistograms"
+#    params:
+#      method: hs_em
+#      dataset: synth_spikes_n8192_s005
+#      iterations: [ 1, 2, 3, 4, 5, "final" ]
+#      bins: 20
+#      output: "beta_hist_spikes2.png"
+#
+#  beta_scatter_hs:
+#    title: "Beta values across iterations (HS–EM)"
+#    method_title: 'Bayesian Horseshoe (EM)'
+#    cls: "src.figure.BetaScatter"
+#    params:
+#      method: hs_em
+#      dataset: synth_spikes
+#      em_iterations_list: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, "final"]
+#      seed: 42
+#      num_spikes: 4
+#      bins: 60
+#      n: 1024
+#      sigma: 0.2
+#      show_fit: False
+#      show_beta: True
+#      num_col: 4
+#      output: "scatter_beta_hs.png"
+#
+#  beta_scatter_l1:
+#    title: "Beta values across iterations (L1–EM)"
+#    method_title: 'Bayesian L1 (EM)'
+#    cls: "src.figure.BetaScatter"
+#    params:
+#      method: l1_em
+#      dataset: synth_spikes
+#      em_iterations_list: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, "final"]
+#      seed: 42
+#      num_spikes: 4
+#      bins: 60
+#      n: 1024
+#      verbose: true
+#      sigma: 0.2
+#      show_fit: False
+#      show_beta: True
+#      num_col: 4
+#      output: "scatter_beta_l1.png"
+#
+#  beta_fit_hs:
+#    title: "Fit across iterations (BHS-TF)"
+#    method_title: 'Bayesian Horseshoe (EM)'
+#    cls: "src.figure.BetaScatter"
+#    params:
+#      method: hs_em
+#      dataset: synth_spikes
+#      em_iterations_list: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, "final"]
+#      seed: 42
+#      num_spikes: 4
+#      bins: 60
+#      n: 1024
+#      sigma: 0.5
+#      show_fit: True
+#      show_beta: False
+#      num_col: 4
+#      output: "fit_beta_hs.png"
+#
+  beta_fit_l1:
+    title: "Fit across iterations (B$\\ell_1$–TF)"
+    method_title: 'Bayesian L1 (EM)'
+    cls: "src.figure.BetaScatter"
+    params:
+      method: l1_em_cv
+      dataset: synth_spikes
+      em_iterations_list: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, "final"]
+      seed: 42
+      num_spikes: 4
+      bins: 60
+      n: 1024
+      verbose: true
+      sigma: 0.5
+      show_fit: True
+      show_beta: False
+      num_col: 4
+      output: "fit_beta_l1.png"
+
+#  beta_scatter_fit_hs:
+#    title: "Fit across iterations (BHS–TF)"
+#    method_title: 'Bayesian Horseshoe (EM)'
+#    cls: "src.figure.BetaScatter"
+#    params:
+#      method: hs_em
+#      dataset: synth_spikes
+#      em_iterations_list: [ 1, 4, 8, "final" ]
+#      seed: 42
+#      num_spikes: 4
+#      bins: 60
+#      n: 1024
+#      sigma: 0.5
+#      show_fit: True
+#      show_beta: True
+#      num_col: 4
+#      output: "scatter_fit_beta_hs.png"
+#
+  beta_scatter_fit_l1:
+    title: "Fit across iterations (B$\\ell_1$–TF)"
+    method_title: 'Bayesian L1 (EM)'
+    cls: "src.figure.BetaScatter"
+    params:
+      method: l1_em_cv
+      dataset: synth_spikes
+      em_iterations_list: [ 1, 4, 8, "final" ]
+      seed: 42
+      num_spikes: 4
+      bins: 60
+      n: 1024
+      verbose: true
+      sigma: 0.5
+      show_fit: True
+      show_beta: True
+      num_col: 4
+      output: "scatter_fit_beta_l1.png"
+
+#  lambda_scatter_l1:
+#    title: "Lambda values across iterations (L1–EM)"
+#    cls: "src.figure.LambdaScatter"
+#    params:
+#      method: l1_em
+#      dataset: synth_spikes_s005
+#      em_iterations_list: [ 1, 2, 3, 4, 5, 6, 7, 10, 20, "final" ]
+#      seed: 42
+#      num_spikes: 3
+#      bins: 60
+#      n: 8192
+#      tau2: 1e-5
+#      sigma: 0.25
+#      output: "lambda_scatter_spikes_l1.png"
+
+#  lambda_scatter_l1:
+#    title: "Lambda values across iterations (L1)"
+#    cls: "src.figure.LambdaScatter"
+#    params:
+#      method: l1_tf_cv
+#      dataset: synth_spikes_n8192_s005
+#      iterations: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, "final" ]
+#      seed: 42
+#      output: "lambda_scatter_spikes_l1.png"
+#
+#  scaling_hsem:
+#    title: "BHS-TF scaling (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "hs_em"
+#      dataset: synth_spikes
+#      sigma: 0.2
+#      spikes: [4]
+#      iterations: 200
+#      n: [128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+#      output: "scaling_hs"
+#      use_csv: True
+#
+#  scaling_l1em:
+#    title: "B$\\ell_1$-TF scaling (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "l1_em_cv"
+#      dataset: synth_spikes
+#      sigma: 0.2
+#      spikes: [ 4 ]
+#      iterations: 200
+#      n: [ 128, 256, 512, 1024, 2048, 4096, 8192, 16384 ]
+#      output: "scaling_l1"
+#      use_csv: True
+#
+#  scaling_krr:
+#    title: "KRR (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "krr"
+#      dataset: synth_spikes
+#      sigma: 0.2
+#      spikes: [ 4 ]
+#      iterations: 200
+#      n: [ 128, 256, 512, 1024 ]
+#      output: "scaling_krr"
+#      use_csv: False
+##
+#  scaling_l1_freq:
+#    title: "F$\\ell_1$-TF scaling (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "l1_tf_cv"
+#      dataset: synth_spikes
+#      sigma: 0.2
+#      spikes: [ 4 ]
+#      iterations: 200
+#      n: [ 128, 256, 512, 1024 ]
+#      output: "scaling_l1_tf_cv"
+#      use_csv: False
+
+#  scaling_split_spike:
+#    title: "HS–EM scaling (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "hs_em"
+#      dataset: synth_spikes_s005
+#      sigma: 0.25
+#      spikes: [ 1,2,3,4 ]
+#      iterations: 50
+#      n: [ 256, 512, 1024, 2048, 4096, 8192, 16384 ]
+#      output: "scaling_hsem_split_spike_2.png"
+#      use_csv: True
+
+#  scaling_split_converge:
+#    title: "HS–EM scaling (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+#      method: "hs_em"
+#      dataset: synth_spikes_s005
+#      sigma: 0.05
+#      spikes: [ 1,2,3,4 ]
+#      iterations: 50
+#      n: [ 256, 512, 1024, 2048, 4096, 8192, 16384 ]
+#      output: "scaling_hsem_split_converge_2.png"
+#      use_csv: True
+#
+#  scaling_compare:
+#    title: "Scaling comparison (convergence time vs n)"
+#    cls: "src.figure.Scaling"
+#    params:
+##      method: "l1_em"
+#      methods: ["krr","l1_tf_cv", "l1_em", "hs_em"]
+#      dataset: synth_spikes
+#      sigma: 0.2
+#      spikes: [ 4 ]
+#      iterations: 200
+#      n: [ 128, 256, 512, 1024, 2048, 4096, 8192, 16384 ]
+#      output: "scaling_compare"
+#      inputs: ["scaling_krr", "scaling_l1_tf_cv", "scaling_l1", "scaling_hs"]
+#      use_csv: True
+                  # DONT BOTHER WITH ELBOW, MAYBE ANOTHER TIME
+                  #  elbow:
+                  #    title: "EM elbow — diminishing returns"
+                  #    cls: "src.figure.Elbow"
+                  #    params:
+                  #      method: "hs_em"
+                  #      dataset: "synth_spikes_n512_s005"
+                  #      show:
+                  #        mse_train: true
+                  #        tau2: true
+                  #        active_set: true
+                  #      output: "elbow_hsem.png"
+#
+# CAN COPY A LOT FROM THE SCALING CLASS
+#  bubble_frontier:
+#    title: "Accuracy vs runtime vs sparsity (n=512, σ=0.05)"
+#    cls: "src.figure.BubbleFrontier"
+#    params:
+#      dataset: "synth_spikes_n512_s005"
+#      methods: [ "hs_em", "l1_tf_cv", "krr" ]
+#      metric: "mse"   # or mae, mse_true, mae_true (if your runner returns it)
+#      output: "bubble_frontier.png"
+
+datasets:
+  synth_spikes:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 1024
+      name: synth_spikes
+
+  synth_spikes_n1024_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 1024
+      sigma: 0.15
+#      seed: [ 42,23 ]
+#      seed: [ 42,23,13,69 ]
+      seed: [ 42,13,23,3 ]
+      name: synthetic_spikes_1024_s005
+      num_spikes: 3
+
+  synth_spikes_n8192_s005:
+    cls: src.data.synthetic.SyntheticSpikes
+    params:
+      n: 8192
+      sigma: 0.05
+      name: synthetic_spikes_8192_s005
+      num_spikes: 3
+      seed: 42
+
+  synth_inhom:
+    cls: src.data.synthetic.SyntheticInhomogeneous
+    params:
+      n: 1024
+      name: synth_inhom
+
+methods:
+  hs_em:
+    label: "BHS-TF"
+    params:
+      max_iter: 200
+      conv_tol: 1e-3
+      damp_tau: 0.01
+      do_threshold: false
+      verbose: false
+
+  l1_em:
+    label: "B$\\ell_1$-TF"
+    params:
+      max_iter: 200
+      conv_tol: 1e-3
+      tau2: 1e-3
+      tau2_grid: [ 1e-1, 1e-2, 1e-3, 1e-4, 1e-5 ]
+      cv_folds: 5
+      scoring: 'mse'
+      do_threshold: false
+      verbose: false
+
+
+  l1_em_cv:
+    label: "B$\\ell_1$-TF"
+    params:
+      max_iter: 200
+      conv_tol: 1e-3
+      tau2: 1e-5
+      tau2_grid: [ 1e-1, 1e-2, 1e-3, 1e-4, 1e-5]
+#      tau2_grid: [ 5e-4, 1e-4, 1e-5 ]
+      cv_folds: 5
+      scoring: 'mse'
+      do_threshold: false
+      verbose: false
+
+  l1_tf_cv:
+    label: "F$\\ell_1$-TF"
+    params:
+      lambda_grid: [1e-1, 1e-2, 1e-3, 1e-4, 1e-5]
+      cv_folds: 5
+      scoring: "mse"
+
+  bayes_l1_gibbs:
+    label: "Bayesian L1 (Gibbs)"
+    params:
+      n_iter: 200
+      burn_in: 20
+      thin: 5
+      seed: 42
+
+  krr:
+    label: "KRR"
+    params:
+      kernel: "rbf"
+      alpha_grid: [1e-6, 1e-3, 1e-2, 1e-1, 1.0]
+      gamma_grid: [1.0, 10.0, 50.0, 100.0]
+
+
+output:
+  dir: report
+  overwrite: true       # true -> start fresh (rewrite metrics/runs and allow trace overwrite)
+#  save_traces: true      # save x, y, y_hat (+ beta_hat) per run
+  save_figs: true           # save a PNG per run
+  figs_dir: report/figs    # where to save figures
+  fig_scale: original       # {original, transformed, both}
+  fig_dpi: 450              # image DPI
